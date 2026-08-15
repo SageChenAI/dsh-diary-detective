@@ -1,0 +1,30 @@
+{
+  "name": "dsh-diary-detective",
+  "version": "0.1.0",
+  "description": "Diary Detective for DeepSeek Harness — a warm mirror that reads journals, illuminates blind spots, and gives gentle daily feedback. 赛博日记侦探：一面有温度的镜子，读日记、照见盲点、给温柔反馈。",
+  "type": "module",
+  "main": "src/index.js",
+  "files": [
+    "src/index.js",
+    "cordis.patch.yml",
+    "SKILL.md"
+  ],
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "diary",
+    "journal",
+    "feedback",
+    "cordis"
+  ],
+  "dependencies": {
+    "@deepseek-ai/dsh-tools": "^0.1.0"
+  },
+  "license": "MIT",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}
