@@ -179,7 +179,14 @@ export function apply(ctx) {
       async execute(args, exec) {
         const dir = args.dir || DEFAULT_DIR
         const date = args.date || todayIso()
-        const name = date + '.md'
+      async execute(args, exec) {
+        const dir = args.dir || DEFAULT_DIR
+        const date = args.date || todayIso()
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+          return { ok: false, error: 'date 格式必须为 YYYY-MM-DD' }
+        }
+        const name = date + '.md'     
+       const name = date + '.md'
         try {
           const target = await fs.resolve(dir.replace(/[\\/]+$/, '') + '/' + name, { signal: exec.signal })
           let existing = null
