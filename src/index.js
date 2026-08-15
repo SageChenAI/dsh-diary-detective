@@ -62,18 +62,24 @@ export function apply(ctx) {
     meta._body = body
     return meta
   }
-
   function bigrams(text) {
-    const runs = text.match(/[\u4e00-\u9fff]+/g) || []
+    // 中文：连续汉字二元组；英文：单词二元组（忽略大小写）
     const out = {}
-    for (const run of runs) {
+    const cnRuns = text.match(/[\u4e00-\u9fff]+/g) || []
+    for (const run of cnRuns) {
       for (let i = 0; i < run.length - 1; i++) {
         const g = run.slice(i, i + 2)
         out[g] = (out[g] || 0) + 1
       }
     }
+    const enWords = text.match(/[A-Za-z]+/g) || []
+    for (let i = 0; i < enWords.length - 1; i++) {
+      const g = (enWords[i] + ' ' + enWords[i + 1]).toLowerCase()
+      out[g] = (out[g] || 0) + 1
+    }
     return out
   }
+  
 
   function isTemplate(name) {
     return /模板|template|YYYY|\bTMP\b/i.test(name)
